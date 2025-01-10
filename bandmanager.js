@@ -57,7 +57,18 @@ class BandManager {
         this.initiateCycle();
     }
 
+    // Fisher-Yates shuffle algorithm
+    shuffleBands() {
+        for (let i = this.bands.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.bands[i], this.bands[j]] = [this.bands[j], this.bands[i]];
+        }
+    }
+
     initiateCycle() {
+        // Shuffle bands before creating new battles
+        this.shuffleBands();
+        
         this.activeBattles = [];
         let totalPairs = PARAMS.numBands / 2;  // 25 pairs
 
